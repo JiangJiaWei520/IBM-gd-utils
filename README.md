@@ -62,7 +62,8 @@ TG_USERNAME        Telegram账号ID,多个用,隔开tg_whitelist: ['gavin55'] //
 DRIVE_ID           GD默认保存目录ID
 SA_DLURL           SA打包文件accounts.zip下载url
  ```
-第四部：修改config.js
+**修改config.js**
+否则会提示:gd-utils 成功启动{"ok":false,"error_code":404,"description":"Not Found"}
 ```
 const AUTH = { // 如果您擁有SA的json授權文件，可將其拷貝至 sa 目錄中以代替 client_id/secret/refrest_token 這裡建議使用自己的client_id, 具體參考說明文件#個人帳號配置
   client_id: '自己的',
@@ -74,11 +75,24 @@ const AUTH = { // 如果您擁有SA的json授權文件，可將其拷貝至 sa �
   tg_whitelist: ['gavin55'] // 你的tg username(t.me/username)，bot只會執行這個列表中的用戶所發送的指令
 }
 ```
-结束
 
 **tgbot通信不成功**
-curl -F "url=https://${{ secrets.IBM_APP_NAME }}.us-south.cf.appdomain.cloud/api/gdurl/tgbot" 'https://api.telegram.org/bot${{ secrets.TG_TOKEN }}/setWebhook'
+
+查看是否是容器名称错误问题：
+正确(name和routes前面都是***)：
 ```
+name:              ***
+requested state:   started
+routes:            ***.us-south.cf.appdomain.cloud
+last uploaded:     Mon 0*** Sep 15:26:35 UTC 2020
+stack:             cflinuxfs3
+buildpacks:        nodejs
+```
+解决：
+重新执行全自动安装的第四步或者在容器执行下面操作：
+```
+curl -F "url=https://${{ secrets.IBM_APP_NAME }}.us-south.cf.appdomain.cloud/api/gdurl/tgbot" 'https://api.telegram.org/bot${{ secrets.TG_TOKEN }}/setWebhook'
+
 eg:
 curl -F "url=https://xxxxxx.us-south.cf.appdomain.cloud/api/gdurl/tgbot" 'https://api.telegram.org/bot1212663241:AAFh2HyeAPbKtagGQlC5BGxxxxxxxxxxxx/setWebhook'
 ```
