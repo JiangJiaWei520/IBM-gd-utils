@@ -36,6 +36,7 @@ SA_DLURL           SA打包文件accounts.zip下载url
  ```
 
 第四步：在你自己的GitHub项目里面，点Actions然后点左侧IBM Cloud Auto Install切换，然后点 Run workflow 开始全自动安装(看不到Auto Install的话，点开yml文件随便加一空行保存),如果没有则在IBM-gd-utils/.github/workflows/下添加auto_install.yml、auto_restart.yml和ibm_test.yaml文件
+
 结束
 
 **打开你自己建的TGbot，输入/help**
@@ -74,3 +75,10 @@ const AUTH = { // 如果您擁有SA的json授權文件，可將其拷貝至 sa �
 }
 ```
 结束
+
+**tgbot通信不成功**
+curl -F "url=https://${{ secrets.IBM_APP_NAME }}.us-south.cf.appdomain.cloud/api/gdurl/tgbot" 'https://api.telegram.org/bot${{ secrets.TG_TOKEN }}/setWebhook'
+```
+eg:
+curl -F "url=https://xxxxxx.us-south.cf.appdomain.cloud/api/gdurl/tgbot" 'https://api.telegram.org/bot1212663241:AAFh2HyeAPbKtagGQlC5BGxxxxxxxxxxxx/setWebhook'
+```
